@@ -1,3 +1,3 @@
 # JSONAPIViz
 
-A description of this package.
+JSONAPI support for generating a GraphViz DOT format string.
