@@ -35,7 +35,11 @@ subgraph {
 """
     }
 
-    public func fullGraphVizDOT() -> String {
+    public func fullGraphVizDOT(
+        nodeFilter: (Resource) -> Bool = { _ in true },
+        edgeFilter: (Resource.Relative) -> Bool = { _ in true },
+        coloring: (Resource) -> Color? = { _ in nil }
+    ) -> String {
         return
 """
 strict digraph D {
@@ -43,8 +47,9 @@ strict digraph D {
     nodesep=0.25
     ranksep=0.75
     ratio=auto
+    node [shape=box;style=rounded]
     \(rankedGroups(ranks))
-    { \(edges(resources)) }
+    { \(nodesAndEdges(resources, nodeFilter: nodeFilter, edgeFilter: edgeFilter, coloring: coloring)) }
 }
 """
     }
@@ -67,12 +72,35 @@ strict digraph D {
             .joined(separator: "\n")
     }
 
-    func edges(_ resources: Set<Resource>) -> String {
-        resources.map { edges($0) }.joined(separator: "\n\n")
+    func nodesAndEdges(
+        _ resources: Set<Resource>,
+        nodeFilter: (Resource) -> Bool = { _ in true },
+        edgeFilter: (Resource.Relative) -> Bool = { _ in true },
+        coloring: (Resource) -> Color? = { _ in nil }
+    ) -> String {
+        return resources.filter(nodeFilter).map { resource in
+            return
+"""
+\(coloring(resource).map { "\(resource.typeName) [fillcolor=\($0.rawValue);style=\"filled,rounded,bold\"]" } ?? "")
+\(edges(resource, edgeFilter: edgeFilter))
+"""
+        }.joined(separator: "\n")
     }
 
-    func edges(_ resource: Resource, suffix: String = "") -> String {
-        resource.relatives.map { relative in
+    func edges(
+        _ resources: Set<Resource>,
+        nodeFilter: (Resource) -> Bool = { _ in true },
+        edgeFilter: (Resource.Relative) -> Bool = { _ in true }
+    ) -> String {
+        resources.filter(nodeFilter).map { edges($0, edgeFilter: edgeFilter) }.joined(separator: "\n\n")
+    }
+
+    func edges(
+        _ resource: Resource,
+        suffix: String = "",
+        edgeFilter: (Resource.Relative) -> Bool = { _ in true }
+    ) -> String {
+        resource.relatives.filter(edgeFilter).map { relative in
             edge(from: resource, to: relative, suffix: suffix)
         }.joined(separator: "\n")
     }
