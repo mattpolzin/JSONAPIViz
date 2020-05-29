@@ -56,7 +56,7 @@ public struct Relative: Hashable {
     }
 
     // An omittable to-one relationship
-    public init<Identifiable: JSONAPI.Identifiable, MetaType: JSONAPI.Meta, LinksType: JSONAPI.Links>(name: String, _ relationshipType: JSONAPI.ToOneRelationship<Identifiable, MetaType, LinksType>?.Type) {
+    public init<Identifiable: JSONAPIIdentifiable, MetaType: JSONAPI.Meta, LinksType: JSONAPI.Links>(name: String, _ relationshipType: JSONAPI.ToOneRelationship<Identifiable, MetaType, LinksType>?.Type) {
         self.name = name
         self.jsonType = Identifiable.jsonType
         self.relationship = .toOne(.optional)
