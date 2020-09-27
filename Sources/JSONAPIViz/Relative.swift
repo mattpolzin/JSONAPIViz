@@ -42,35 +42,35 @@ public struct Relative: Hashable {
     }
 
     // A required to-one relationship
-    public init<Identifiable, MetaType: JSONAPI.Meta, LinksType: JSONAPI.Links>(name: String, _ relationshipType: JSONAPI.ToOneRelationship<Identifiable, MetaType, LinksType>.Type) where Identifiable: Relatable {
+    public init<Identifiable, IdMetaType: JSONAPI.Meta, MetaType: JSONAPI.Meta, LinksType: JSONAPI.Links>(name: String, _ relationshipType: JSONAPI.ToOneRelationship<Identifiable, IdMetaType, MetaType, LinksType>.Type) where Identifiable: Relatable {
         self.name = name
         self.jsonType = Identifiable.jsonType
         self.relationship = .toOne(.required)
     }
 
     // A nullable to-one relationship
-    public init<Identifiable, MetaType: JSONAPI.Meta, LinksType: JSONAPI.Links>(name: String, _ relationshipType: JSONAPI.ToOneRelationship<Identifiable, MetaType, LinksType>.Type) where Identifiable: OptionalRelatable {
+    public init<Identifiable, IdMetaType: JSONAPI.Meta, MetaType: JSONAPI.Meta, LinksType: JSONAPI.Links>(name: String, _ relationshipType: JSONAPI.ToOneRelationship<Identifiable, IdMetaType, MetaType, LinksType>.Type) where Identifiable: OptionalRelatable {
         self.name = name
         self.jsonType = Identifiable.jsonType
         self.relationship = .toOne(.optional)
     }
 
     // An omittable to-one relationship
-    public init<Identifiable: JSONAPIIdentifiable, MetaType: JSONAPI.Meta, LinksType: JSONAPI.Links>(name: String, _ relationshipType: JSONAPI.ToOneRelationship<Identifiable, MetaType, LinksType>?.Type) {
+    public init<Identifiable: JSONAPIIdentifiable, IdMetaType: JSONAPI.Meta, MetaType: JSONAPI.Meta, LinksType: JSONAPI.Links>(name: String, _ relationshipType: JSONAPI.ToOneRelationship<Identifiable, IdMetaType, MetaType, LinksType>?.Type) {
         self.name = name
         self.jsonType = Identifiable.jsonType
         self.relationship = .toOne(.optional)
     }
 
     // A required to-many relationship
-    public init<Relatable: JSONAPI.Relatable, MetaType: JSONAPI.Meta, LinksType: JSONAPI.Links>(name: String, _ relationshipType: ToManyRelationship<Relatable, MetaType, LinksType>.Type) {
+    public init<Relatable: JSONAPI.Relatable, IdMetaType: JSONAPI.Meta, MetaType: JSONAPI.Meta, LinksType: JSONAPI.Links>(name: String, _ relationshipType: ToManyRelationship<Relatable, IdMetaType, MetaType, LinksType>.Type) {
         self.name = name
         self.jsonType = Relatable.jsonType
         self.relationship = .toMany(.required)
     }
 
     // An omittable to-many relationship
-    public init<Relatable: JSONAPI.Relatable, MetaType: JSONAPI.Meta, LinksType: JSONAPI.Links>(name: String, _ relationshipType: ToManyRelationship<Relatable, MetaType, LinksType>?.Type) {
+    public init<Relatable: JSONAPI.Relatable, IdMetaType: JSONAPI.Meta, MetaType: JSONAPI.Meta, LinksType: JSONAPI.Links>(name: String, _ relationshipType: ToManyRelationship<Relatable, IdMetaType, MetaType, LinksType>?.Type) {
         self.name = name
         self.jsonType = Relatable.jsonType
         self.relationship = .toMany(.optional)
