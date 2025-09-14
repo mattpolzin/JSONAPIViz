@@ -1,25 +1,24 @@
 {
-  "object": {
-    "pins": [
-      {
-        "package": "JSONAPI",
-        "repositoryURL": "https://github.com/mattpolzin/JSONAPI.git",
-        "state": {
-          "branch": null,
-          "revision": "c645c73f51808b85a881e8af6f286086ee65cc35",
-          "version": "5.0.0"
-        }
-      },
-      {
-        "package": "Poly",
-        "repositoryURL": "https://github.com/mattpolzin/Poly.git",
-        "state": {
-          "branch": null,
-          "revision": "36ba3f624bffa34f5f9b9c7648eab3cfdcab4748",
-          "version": "2.5.0"
-        }
+  "originHash" : "8f1c9c6a1494b1b3db2214c0c5636c40c96cbd5ab762fa4837b872f7e5b58197",
+  "pins" : [
+    {
+      "identity" : "jsonapi",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/mattpolzin/JSONAPI.git",
+      "state" : {
+        "revision" : "d3457ae21a76b21e9a8f5bf3953ba9166cfa12f0",
+        "version" : "6.0.0"
       }
-    ]
-  },
-  "version": 1
+    },
+    {
+      "identity" : "poly",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/mattpolzin/Poly.git",
+      "state" : {
+        "revision" : "37c942daa23ab373ce05ef87f42103342e59cf3a",
+        "version" : "3.0.0"
+      }
+    }
+  ],
+  "version" : 3
 }
